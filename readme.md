@@ -1,0 +1,1 @@
+implemented rabbitmq, publisher and sender
