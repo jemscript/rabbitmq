@@ -8,7 +8,7 @@ const amqp = require('amqplib/callback_api');
 // dotenv
 const dotenv = require('dotenv')
 dotenv.config('/');
-const PORT = process.env.PORT || 3200;
+const PORT = process.env.PORT || 3100;
 
 // database
 require("./db/connect");
@@ -20,19 +20,6 @@ app.use(cors())
 // router
 const router = require("./routes/routes");
 app.use('/api/v1', router);
-
-
-// app.get('/users', function (req, res) {
-//   let data = {
-//     id:1,
-//     name:'Jem',
-//     age:25
-//   }
-//   res.send('message from user service')
-// })
-
-
-
 
 app.get('/products', async (req, res) => {
 
