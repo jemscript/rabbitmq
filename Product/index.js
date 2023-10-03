@@ -36,20 +36,20 @@ app.use('/api/v1', router);
 
 app.get('/products', async (req, res) => {
 
-  amqp.connect(`amqp://localhost`,function(err,conn){
-    if(err){
-      console.log("err",err);
+  amqp.connect(`amqp://localhost`, function (err, conn) {
+    if (err) {
+      console.log("err", err);
     }
-  
-    conn.createChannel(function(err,ch){
+
+    conn.createChannel(function (err, ch) {
       const queue = "Message_Queue_User"
       // ch.assertQueue(queue,{durable:false})
       // ch.sendToQueue(queue,msg)
       console.log(`Waiting for the msg from queue`);
-      ch.consume(queue,async function(msg){
-        console.log("message from user",msg.content.toString());
+      ch.consume(queue, async function (msg) {
+        console.log("message from user", msg.content.toString());
         await res.send(msg.content.toString())
-      },{noAck:true})
+      }, { noAck: true })
     })
 
   })
@@ -57,11 +57,11 @@ app.get('/products', async (req, res) => {
 
   // const userData = await axios.get('http://localhost:3200/users')
   // res.send("Message from product service" + userData.data)
-  })
+})
 
 // listening
-app.listen(PORT,()=>{
-    console.log(`connected to the ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`connected to the ${PORT}`);
 })
 
 
